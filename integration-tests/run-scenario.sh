@@ -137,13 +137,13 @@ if [ "${os}" = "Windows" ]; then
   request_ec2_password $instance_id
   REM_DIR=$(echo "$REM_DIR" | sed 's/\\//g')
   echo "Copying files to ${REM_DIR}.."
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE1} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE2} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE3} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE4} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE5} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE6} ${user}@${host}:${REM_DIR}
-  sshpass -p '${password}' scp -q -o StrictHostKeyChecking=no ${FILE8} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE1} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE2} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE3} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE4} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE5} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE6} ${user}@${host}:${REM_DIR}
+  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE8} ${user}@${host}:${REM_DIR}
 
   echo "=== Files copied successfully ==="
   echo "Execution begins.. "
