@@ -144,7 +144,7 @@ if [ "${os}" = "Windows" ]; then
   #sshpass -p "${password}" scp -r -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
   #sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
   #sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/output.properties ${DIR}
-  scp -r -i ${key_pem} ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
+  scp -r -i ${key_pem} StrictHostKeyChecking=no ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
   echo "=== Reports retrieved successfully ==="
   #set -o xtrace
 else
@@ -166,7 +166,7 @@ else
   #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
   #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
   #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/output.properties ${DIR}
-  scp -i ${key_pem} ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
+  scp -i ${key_pem} StrictHostKeyChecking=no ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
   echo "=== Reports are copied success ==="
 fi
 ##script ends
