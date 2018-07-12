@@ -134,26 +134,17 @@ if [ "${os}" = "Windows" ]; then
   echo "Waiting 4 minutes till Windows instance is configured. "
   sleep 4m #wait 4 minutes till Windows instance is configured and able to receive password using key file.
   set +o xtrace #avoid printing sensitive data in the next commands
-  request_ec2_password $instance_id
-  REM_DIR=$(echo "$REM_DIR" | sed 's/\\//g')
-  echo "Copying files to ${REM_DIR}.."
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE1} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE2} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE3} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE4} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE5} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE6} ${user}@${host}:${REM_DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${FILE8} ${user}@${host}:${REM_DIR}
 
   echo "=== Files copied successfully ==="
   echo "Execution begins.. "
 
-  sshpass -p "${password}" ssh -o StrictHostKeyChecking=no ${user}@${host} "${REM_DIR}/${FILE8}" ${REM_DIR}
+  #sshpass -p "${password}" ssh -o StrictHostKeyChecking=no ${user}@${host} "${REM_DIR}/${FILE8}" ${REM_DIR}
   echo "=== End of execution ==="
   echo "Retrieving reports from instance.. "
-  sshpass -p "${password}" scp -r -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
-  sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/output.properties ${DIR}
+  #sshpass -p "${password}" scp -r -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
+  #sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
+  #sshpass -p "${password}" scp -q -o StrictHostKeyChecking=no ${user}@${host}:${REM_DIR}/output.properties ${DIR}
+  scp -r -i ${key_pem} ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
   echo "=== Reports retrieved successfully ==="
   set -o xtrace
 else
@@ -169,12 +160,14 @@ else
 
   echo "=== Files copied successfully ==="
 
-  ssh -o StrictHostKeyChecking=no -i ${key_pem} ${user}@${host} bash ${REM_DIR}/intg-test-runner.sh --wd ${REM_DIR}
+  #ssh -o StrictHostKeyChecking=no -i ${key_pem} ${user}@${host} bash ${REM_DIR}/intg-test-runner.sh --wd ${REM_DIR}
 
   #Get the reports from integration test
-  scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
-  scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
-  scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/output.properties ${DIR}
+  #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/surefire-reports ${DIR}
+  #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/product-apim/modules/integration/tests-integration/tests-backend/target/logs/automation.log ${DIR}
+  #scp -o StrictHostKeyChecking=no -r -i ${key_pem} ${user}@${host}:${REM_DIR}/output.properties ${DIR}
+  scp -i ${key_pem} ubuntu@testgrid-live-dev.private.wso2.com:/home/ubuntu/surefire-reports ${DIR}
+
   echo "=== Reports are copied success ==="
 fi
 ##script ends
